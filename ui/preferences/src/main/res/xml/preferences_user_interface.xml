@@ -79,7 +79,7 @@
                 android:key="prefDefaultPage"
                 android:title="@string/pref_default_page"
                 android:summary="@string/pref_default_page_sum"
-                android:defaultValue="HomeFragment"/>
+                android:defaultValue="SubscriptionFragment"/>
         <SwitchPreferenceCompat
                 android:title="@string/bottom_navigation"
                 android:summary="@string/bottom_navigation_summary"
