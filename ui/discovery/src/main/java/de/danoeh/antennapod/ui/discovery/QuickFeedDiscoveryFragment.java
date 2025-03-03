@@ -45,10 +45,6 @@ public class QuickFeedDiscoveryFragment extends Fragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         viewBinding = QuickFeedDiscoveryBinding.inflate(inflater);
-        viewBinding.discoverMore.setOnClickListener(v -> startActivity(new MainActivityStarter(getContext())
-                .withFragmentLoaded(DiscoveryFragment.TAG)
-                .withAddToBackStack()
-                .getIntent()));
 
         adapter = new FeedDiscoverAdapter(getActivity());
         viewBinding.discoverGrid.setAdapter(adapter);

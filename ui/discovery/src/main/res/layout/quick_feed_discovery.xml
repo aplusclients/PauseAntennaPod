@@ -67,15 +67,6 @@
             android:paddingHorizontal="4dp"
             style="@style/TextAppearance.Material3.BodySmall" />
 
-        <Button
-            android:id="@+id/discover_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="40dp"
-            android:minWidth="0dp"
-            android:text="@string/discover_more"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
-
     </LinearLayout>
 
 </LinearLayout>
