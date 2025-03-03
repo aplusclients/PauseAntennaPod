@@ -6,7 +6,6 @@ This is a simplified fork of AntennaPod, focusing on local podcast management wi
 
 - Removed all podcast discovery features
 - Simplified podcast addition to only support:
-  - Local folder import
   - OPML import
 - Streamlined UI with focus on essential podcast management
 

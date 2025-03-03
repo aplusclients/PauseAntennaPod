@@ -52,8 +52,6 @@ public class AddFeedFragment extends Fragment {
 
     private final ActivityResultLauncher<String> chooseOpmlImportPathLauncher =
             registerForActivityResult(new GetContent(), this::chooseOpmlImportPathResult);
-    private final ActivityResultLauncher<Uri> addLocalFolderLauncher =
-            registerForActivityResult(new AddLocalFolder(), this::addLocalFolderResult);
 
     @Override
     @Nullable
@@ -83,16 +81,6 @@ public class AddFeedFragment extends Fragment {
             }
         });
 
-        viewBinding.addLocalFolderButton.setOnClickListener(v -> {
-            try {
-                addLocalFolderLauncher.launch(null);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-                ((MainActivity) getActivity())
-                        .showSnackbarAbovePlayer(R.string.unable_to_start_system_file_manager, Snackbar.LENGTH_LONG);
-            }
-        });
-
         return viewBinding.getRoot();
     }
 
@@ -109,51 +97,5 @@ public class AddFeedFragment extends Fragment {
         final Intent intent = new Intent(getContext(), OpmlImportActivity.class);
         intent.setData(uri);
         startActivity(intent);
-    }
-
-    private void addLocalFolderResult(final Uri uri) {
-        if (uri == null) {
-            return;
-        }
-        Observable.fromCallable(() -> addLocalFolder(uri))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        feed -> {
-                            Fragment fragment = FeedItemlistFragment.newInstance(feed.getId());
-                            ((MainActivity) getActivity()).loadChildFragment(fragment);
-                        }, error -> {
-                            Log.e(TAG, Log.getStackTraceString(error));
-                            ((MainActivity) getActivity())
-                                    .showSnackbarAbovePlayer(error.getLocalizedMessage(), Snackbar.LENGTH_LONG);
-                        });
-    }
-
-    private Feed addLocalFolder(Uri uri) {
-        getActivity().getContentResolver().takePersistableUriPermission(uri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        DocumentFile documentFile = DocumentFile.fromTreeUri(getContext(), uri);
-        if (documentFile == null) {
-            throw new IllegalArgumentException("Unable to retrieve document tree");
-        }
-        String title = documentFile.getName();
-        if (title == null) {
-            title = getString(R.string.local_folder);
-        }
-        Feed dirFeed = new Feed(Feed.PREFIX_LOCAL_FOLDER + uri.toString(), null, title);
-        dirFeed.setItems(Collections.emptyList());
-        dirFeed.setSortOrder(SortOrder.EPISODE_TITLE_A_Z);
-        Feed fromDatabase = FeedDatabaseWriter.updateFeed(getContext(), dirFeed, false);
-        FeedUpdateManager.getInstance().runOnce(requireContext(), fromDatabase);
-        return fromDatabase;
-    }
-
-    private static class AddLocalFolder extends ActivityResultContracts.OpenDocumentTree {
-        @NonNull
-        @Override
-        public Intent createIntent(@NonNull final Context context, @Nullable final Uri input) {
-            return super.createIntent(context, input)
-                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }
     }
 }

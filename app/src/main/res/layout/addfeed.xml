@@ -37,15 +37,6 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/addLocalFolderButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_local_folder"
-                app:drawableStartCompat="@drawable/ic_folder"
-                app:drawableLeftCompat="@drawable/ic_folder"
-                style="@style/AddPodcastTextView" />
-
-            <TextView
                 android:id="@+id/opmlImportButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
