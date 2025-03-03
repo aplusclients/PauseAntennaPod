@@ -1,13 +1,29 @@
-# AntennaPod
+# PauseAntenna
 
-[![GitHub check runs](https://img.shields.io/github/check-runs/AntennaPod/AntennaPod/develop)](https://github.com/AntennaPod/AntennaPod/actions/workflows/checks.yml?query=branch%3Adevelop)
-[![License: GPL v3](https://img.shields.io/github/license/AntennaPod/AntennaPod)](https://www.gnu.org/licenses/gpl-3.0)
-[![GitHub Release](https://img.shields.io/github/v/release/AntennaPod/AntennaPod)](https://github.com/AntennaPod/AntennaPod/releases)
-[![https://img.shields.io/github/commits-since/AntennaPod/AntennaPod/latest/develop](https://img.shields.io/github/commits-since/AntennaPod/AntennaPod/latest/develop)](https://github.com/AntennaPod/AntennaPod/commits/develop/)
-[![Translations on Weblate](https://hosted.weblate.org/widget/antennapod/app/svg-badge.svg?native=1)](https://hosted.weblate.org/engage/antennapod/)
-[![Good first issue](https://img.shields.io/github/issues-search?query=repo%3AAntennaPod%2FAntennaPod%20is%3Aopen%20is%3Aissue%20label%3A%22Good%20first%20issue%22&label=Good%20first%20issue&labelColor=grey&color=%235F1984)](https://github.com/AntennaPod/AntennaPod/labels/Good%20first%20issue)
+This is a simplified fork of AntennaPod, focusing on local podcast management without discovery features. The goal is to provide a minimalist podcast player that emphasizes privacy and simplicity.
 
-This is the official repository of AntennaPod, the easy-to-use, flexible and open-source podcast manager for Android.
+## Key Differences from AntennaPod
+
+- Removed all podcast discovery features
+- Simplified podcast addition to only support:
+  - Local folder import
+  - OPML import
+- Streamlined UI with focus on essential podcast management
+- Package renamed to `com.example.pauseantenna`
+
+## Building from Source
+
+1. Clone this repository
+2. Open in Android Studio
+3. Build using Gradle
+
+## License
+
+This fork maintains the GPL v3 license from the original AntennaPod project.
+
+## Credits
+
+Based on [AntennaPod](https://github.com/AntennaPod/AntennaPod), the easy-to-use, flexible and open-source podcast manager for Android.
 
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
       alt="Get it on Google Play"
@@ -41,4 +57,3 @@ If you want to translate AntennaPod into another language, you can visit our [We
 ## Building AntennaPod
 
 You can build AntennaPod just like any other Android project. Refer to the [instructions](https://github.com/AntennaPod/AntennaPod/blob/develop/CONTRIBUTING.md) for more details.
-
