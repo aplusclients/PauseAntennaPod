@@ -377,7 +377,6 @@ public class SearchFragment extends Fragment implements EpisodeItemListAdapter.O
         if (disposableEpisodes != null) {
             disposableEpisodes.dispose();
         }
-        adapterFeeds.setEndButton(R.string.search_online, this::searchOnline);
         long feed = getArguments().getLong(ARG_FEED, 0);
         chip.setVisibility((feed == 0) ? View.GONE : View.VISIBLE);
 
@@ -415,19 +414,6 @@ public class SearchFragment extends Fragment implements EpisodeItemListAdapter.O
         if (imm != null) {
             imm.showSoftInput(view, 0);
         }
-    }
-
-    private void searchOnline() {
-        searchView.clearFocus();
-        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
-        String query = searchView.getQuery().toString();
-        if (query.matches("http[s]?://.*")) {
-            startActivity(new OnlineFeedviewActivityStarter(getContext(), query).getIntent());
-            return;
-        }
-        ((MainActivity) getActivity()).loadChildFragment(
-                OnlineSearchFragment.newInstance(CombinedSearcher.class, query));
     }
 
     @Override
