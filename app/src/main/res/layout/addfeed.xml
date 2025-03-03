@@ -36,62 +36,6 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginHorizontal="16dp"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:id="@+id/searchbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="?attr/colorSurfaceContainer">
-
-                    <ImageView
-                        android:id="@+id/searchButton"
-                        android:layout_width="40dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:contentDescription="@string/search_podcast_hint"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_search" />
-
-                    <EditText
-                        android:id="@+id/combinedFeedSearchEditText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="text"
-                        android:imeOptions="actionSearch"
-                        android:importantForAutofill="no"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        android:hint="@string/search_podcast_hint"
-                        android:background="@null" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/addViaUrlButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_podcast_by_url"
-                app:drawableStartCompat="@drawable/ic_feed"
-                app:drawableLeftCompat="@drawable/ic_feed"
-                style="@style/AddPodcastTextView" />
-
             <TextView
                 android:id="@+id/addLocalFolderButton"
                 android:layout_width="match_parent"
@@ -99,33 +43,6 @@
                 android:text="@string/add_local_folder"
                 app:drawableStartCompat="@drawable/ic_folder"
                 app:drawableLeftCompat="@drawable/ic_folder"
-                style="@style/AddPodcastTextView" />
-
-            <TextView
-                android:id="@+id/searchItunesButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/search_itunes_label"
-                app:drawableStartCompat="@drawable/ic_search"
-                app:drawableLeftCompat="@drawable/ic_search"
-                style="@style/AddPodcastTextView" />
-
-            <TextView
-                android:id="@+id/searchFyydButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/search_fyyd_label"
-                app:drawableStartCompat="@drawable/ic_search"
-                app:drawableLeftCompat="@drawable/ic_search"
-                style="@style/AddPodcastTextView" />
-
-            <TextView
-                android:id="@+id/searchPodcastIndexButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/search_podcastindex_label"
-                app:drawableStartCompat="@drawable/ic_search"
-                app:drawableLeftCompat="@drawable/ic_search"
                 style="@style/AddPodcastTextView" />
 
             <TextView

@@ -1,8 +1,6 @@
 package de.danoeh.antennapod.ui.screen;
 
 import android.content.ActivityNotFoundException;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +16,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.activity.result.contract.ActivityResultContracts.GetContent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import androidx.core.widget.NestedScrollView;
 import androidx.documentfile.provider.DocumentFile;
@@ -33,13 +30,6 @@ import de.danoeh.antennapod.net.download.serviceinterface.FeedUpdateManager;
 import de.danoeh.antennapod.storage.database.FeedDatabaseWriter;
 import de.danoeh.antennapod.model.feed.SortOrder;
 import de.danoeh.antennapod.databinding.AddfeedBinding;
-import de.danoeh.antennapod.databinding.EditTextDialogBinding;
-import de.danoeh.antennapod.net.discovery.CombinedSearcher;
-import de.danoeh.antennapod.net.discovery.FyydPodcastSearcher;
-import de.danoeh.antennapod.net.discovery.ItunesPodcastSearcher;
-import de.danoeh.antennapod.net.discovery.PodcastIndexPodcastSearcher;
-import de.danoeh.antennapod.ui.appstartintent.OnlineFeedviewActivityStarter;
-import de.danoeh.antennapod.ui.discovery.OnlineSearchFragment;
 import de.danoeh.antennapod.ui.screen.feed.FeedItemlistFragment;
 import de.danoeh.antennapod.ui.view.LiftOnScrollListener;
 import io.reactivex.Observable;
@@ -83,21 +73,6 @@ public class AddFeedFragment extends Fragment {
         NestedScrollView scrollView = viewBinding.getRoot().findViewById(R.id.scrollView);
         scrollView.setOnScrollChangeListener(new LiftOnScrollListener(viewBinding.appbar));
 
-        viewBinding.searchItunesButton.setOnClickListener(v
-                -> activity.loadChildFragment(OnlineSearchFragment.newInstance(ItunesPodcastSearcher.class)));
-        viewBinding.searchFyydButton.setOnClickListener(v
-                -> activity.loadChildFragment(OnlineSearchFragment.newInstance(FyydPodcastSearcher.class)));
-        viewBinding.searchPodcastIndexButton.setOnClickListener(v
-                -> activity.loadChildFragment(OnlineSearchFragment.newInstance(PodcastIndexPodcastSearcher.class)));
-
-        viewBinding.combinedFeedSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
-            performSearch();
-            return true;
-        });
-
-        viewBinding.addViaUrlButton.setOnClickListener(v
-                -> showAddViaUrlDialog());
-
         viewBinding.opmlImportButton.setOnClickListener(v -> {
             try {
                 chooseOpmlImportPathLauncher.launch("*/*");
@@ -117,7 +92,6 @@ public class AddFeedFragment extends Fragment {
                         .showSnackbarAbovePlayer(R.string.unable_to_start_system_file_manager, Snackbar.LENGTH_LONG);
             }
         });
-        viewBinding.searchButton.setOnClickListener(view -> performSearch());
 
         return viewBinding.getRoot();
     }
@@ -126,44 +100,6 @@ public class AddFeedFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(KEY_UP_ARROW, displayUpArrow);
         super.onSaveInstanceState(outState);
-    }
-
-    private void showAddViaUrlDialog() {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
-        builder.setTitle(R.string.add_podcast_by_url);
-        final EditTextDialogBinding dialogBinding = EditTextDialogBinding.inflate(getLayoutInflater());
-        dialogBinding.urlEditText.setHint(R.string.add_podcast_by_url_hint);
-
-        ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        final ClipData clipData = clipboard.getPrimaryClip();
-        if (clipData != null && clipData.getItemCount() > 0 && clipData.getItemAt(0).getText() != null) {
-            final String clipboardContent = clipData.getItemAt(0).getText().toString();
-            if (clipboardContent.trim().startsWith("http")) {
-                dialogBinding.urlEditText.setText(clipboardContent.trim());
-            }
-        }
-        builder.setView(dialogBinding.getRoot());
-        builder.setPositiveButton(R.string.confirm_label,
-                (dialog, which) -> addUrl(dialogBinding.urlEditText.getText().toString()));
-        builder.setNegativeButton(R.string.cancel_label, null);
-        builder.show();
-    }
-
-    private void addUrl(String url) {
-        startActivity(new OnlineFeedviewActivityStarter(getContext(), url).withManualUrl().getIntent());
-    }
-
-    private void performSearch() {
-        viewBinding.combinedFeedSearchEditText.clearFocus();
-        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(viewBinding.combinedFeedSearchEditText.getWindowToken(), 0);
-        String query = viewBinding.combinedFeedSearchEditText.getText().toString();
-        if (query.matches("http[s]?://.*")) {
-            addUrl(query);
-            return;
-        }
-        activity.loadChildFragment(OnlineSearchFragment.newInstance(CombinedSearcher.class, query));
-        viewBinding.combinedFeedSearchEditText.post(() -> viewBinding.combinedFeedSearchEditText.setText(""));
     }
 
     private void chooseOpmlImportPathResult(final Uri uri) {
