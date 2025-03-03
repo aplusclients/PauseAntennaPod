@@ -8,7 +8,6 @@
         <item>EpisodesFragment</item>
         <item>DownloadsFragment</item>
         <item>PlaybackHistoryFragment</item>
-        <item>AddFeedFragment</item>
         <item>SubscriptionList</item>
     </string-array>
 </resources>

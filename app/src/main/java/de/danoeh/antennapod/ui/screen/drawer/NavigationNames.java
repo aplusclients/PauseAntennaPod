@@ -3,7 +3,6 @@ package de.danoeh.antennapod.ui.screen.drawer;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import de.danoeh.antennapod.R;
-import de.danoeh.antennapod.ui.screen.AddFeedFragment;
 import de.danoeh.antennapod.ui.screen.AllEpisodesFragment;
 import de.danoeh.antennapod.ui.screen.InboxFragment;
 import de.danoeh.antennapod.ui.screen.PlaybackHistoryFragment;
@@ -29,8 +28,6 @@ public abstract class NavigationNames {
                 return R.drawable.ic_history;
             case SubscriptionFragment.TAG:
                 return R.drawable.ic_subscriptions;
-            case AddFeedFragment.TAG:
-                return R.drawable.ic_add;
             default:
                 return 0;
         }
@@ -52,8 +49,6 @@ public abstract class NavigationNames {
                 return R.string.downloads_label;
             case PlaybackHistoryFragment.TAG:
                 return R.string.playback_history_label;
-            case AddFeedFragment.TAG:
-                return R.string.add_feed_label;
             case NavListAdapter.SUBSCRIPTION_LIST_TAG:
                 return R.string.subscriptions_list_label;
             default:
@@ -77,8 +72,6 @@ public abstract class NavigationNames {
                 return R.string.downloads_label_short;
             case PlaybackHistoryFragment.TAG:
                 return R.string.playback_history_label_short;
-            case AddFeedFragment.TAG:
-                return R.string.add_feed_label_short;
             case NavListAdapter.SUBSCRIPTION_LIST_TAG:
                 return R.string.subscriptions_list_label;
             default:
@@ -98,8 +91,6 @@ public abstract class NavigationNames {
                 return R.id.bottom_navigation_downloads;
             case PlaybackHistoryFragment.TAG:
                 return R.id.bottom_navigation_history;
-            case AddFeedFragment.TAG:
-                return R.id.bottom_navigation_addfeed;
             case SubscriptionFragment.TAG:
                 return R.id.bottom_navigation_subscriptions;
             case HomeFragment.TAG: // fall-through
@@ -119,8 +110,6 @@ public abstract class NavigationNames {
             return CompletedDownloadsFragment.TAG;
         } else if (id == R.id.bottom_navigation_history) {
             return PlaybackHistoryFragment.TAG;
-        } else if (id == R.id.bottom_navigation_addfeed) {
-            return AddFeedFragment.TAG;
         } else if (id == R.id.bottom_navigation_subscriptions) {
             return SubscriptionFragment.TAG;
         } else if (id == R.id.bottom_navigation_home) {
